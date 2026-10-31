@@ -3,6 +3,7 @@ import Carbon
 enum ShortcutKey: String, Codable, CaseIterable {
     case one = "1", two = "2", three = "3", four = "4"
     case q, w, e, r
+    case a, s, d, f
 
     var label: String { "⌥\(rawValue.uppercased())" }
     var accessibilityLabel: String { "Option \(rawValue.uppercased())" }
@@ -17,6 +18,10 @@ enum ShortcutKey: String, Codable, CaseIterable {
         case .w: return UInt32(kVK_ANSI_W)
         case .e: return UInt32(kVK_ANSI_E)
         case .r: return UInt32(kVK_ANSI_R)
+        case .a: return UInt32(kVK_ANSI_A)
+        case .s: return UInt32(kVK_ANSI_S)
+        case .d: return UInt32(kVK_ANSI_D)
+        case .f: return UInt32(kVK_ANSI_F)
         }
     }
 

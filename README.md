@@ -2,7 +2,7 @@
   <img src="assets/icon-1024.png" width="144" alt="QuickLaunch icon">
 </p>
 <h1 align="center">QuickLaunch</h1>
-<p align="center"><strong>자주 쓰는 앱 8개, Option 키로 바로.</strong><br>A tiny, native macOS app launcher. Eight apps. One modifier.</p>
+<p align="center"><strong>자주 쓰는 앱 12개, Option 키로 바로.</strong><br>A tiny, native macOS app launcher. Twelve apps. One modifier.</p>
 <p align="center">
   <a href="https://github.com/jaden2dev/QuickLaunch/releases/latest">다운로드</a> ·
   <a href="#사용법">사용법</a> ·
@@ -10,9 +10,9 @@
   <a href="LICENSE">MIT License</a>
 </p>
 
-![QuickLaunch — 여덟 개 고정 단축키 설정 화면](docs/images/quicklaunch-settings.png)
+![QuickLaunch — 열두 개 고정 단축키 설정 화면](docs/images/quicklaunch-settings.png)
 
-QuickLaunch는 메뉴 막대에 머무르며, **Option + 1·2·3·4·Q·W·E·R**로 지정한 앱을 실행하거나 앞으로 가져옵니다. 각 단축키의 **앱 선택…** 버튼으로 원하는 앱만 연결하세요.
+QuickLaunch는 메뉴 막대에 머무르며, **Option + 1·2·3·4·Q·W·E·R·A·S·D·F**로 지정한 앱을 실행하거나 앞으로 가져옵니다. 각 단축키의 **앱 선택…** 버튼으로 원하는 앱만 연결하세요.
 
 **Option + ₩ / `** 키로 설정 창을 열고 숨길 수 있어, 메뉴 아이콘이 MacBook 노치에 가려져도 바로 접근할 수 있습니다. 숫자 **1 왼쪽의 물결(~) 표시가 있는 키**를 사용하며 Shift는 누르지 않습니다.
 
@@ -20,7 +20,7 @@ QuickLaunch는 메뉴 막대에 머무르며, **Option + 1·2·3·4·Q·W·E·R*
 
 **[QuickLaunch 최신 버전 다운로드 →](https://github.com/jaden2dev/QuickLaunch/releases/latest)**
 
-1. 위 페이지의 **Assets**에서 `QuickLaunch-v1.3.0-macos-arm64.zip`을 받습니다.
+1. 위 페이지의 **Assets**에서 `QuickLaunch-v1.4.0-macos-arm64.zip`을 받습니다.
 2. ZIP 파일을 더블클릭해 압축을 풉니다.
 3. `QuickLaunch.app`을 **응용 프로그램(Applications)** 폴더로 옮기고 실행합니다.
 4. 설정 창에서 각 키에 연결할 앱을 선택합니다.
@@ -41,10 +41,11 @@ QuickLaunch는 메뉴 막대에 머무르며, **Option + 1·2·3·4·Q·W·E·R*
 | ⌥3 | Terminal |
 | ⌥4 | Slack |
 | ⌥Q · ⌥W · ⌥E · ⌥R | 원하는 앱을 선택해 연결 |
+| ⌥A · ⌥S · ⌥D · ⌥F | 원하는 앱을 선택해 연결 |
 
 - **앱 선택…** → `.app` 선택 → 즉시 저장·적용됩니다.
 - 이미 실행 중인 앱은 앞으로 가져오고, 닫힌 앱은 실행합니다.
-- 앱을 지정하지 않은 Q/W/E/R 키는 가로채지 않습니다.
+- 앱을 지정하지 않은 Q/W/E/R/A/S/D/F 키는 가로채지 않습니다.
 - 설정 창을 닫아도 단축키는 작동합니다. 종료는 메뉴 막대의 **QuickLaunch 종료**를 사용하세요.
 - 설정 창이 다른 앱 뒤에 있으면 창 단축키로 앞으로 가져옵니다.
 - 앱 선택 대화상자가 열린 동안에는 창 숨기기를 하지 않습니다.

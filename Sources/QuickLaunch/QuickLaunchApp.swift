@@ -33,7 +33,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func showSettings() {
         if settingsWindow == nil {
             let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 1000, height: 600),
+                contentRect: NSRect(x: 0, y: 0, width: 1200, height: 700),
                 styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false
             )
             window.title = "QuickLaunch 설정"
@@ -104,9 +104,9 @@ private struct SettingsView: View {
                     .resizable().frame(width: 44, height: 44)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("여덟 개의 앱, 바로 실행")
+                    Text("열두 개의 앱, 바로 실행")
                         .font(.title2.weight(.semibold))
-                    Text("Option + 1·2·3·4·Q·W·E·R에 각각 앱을 연결하세요.")
+                    Text("Option + 1·2·3·4·Q·W·E·R·A·S·D·F에 각각 앱을 연결하세요.")
                         .foregroundStyle(.secondary)
                     Text("⌥ + ₩ / `로 설정 열기·숨기기 · Shift 없이 숫자 1 왼쪽 키")
                         .font(.caption).foregroundStyle(.secondary)
@@ -114,7 +114,8 @@ private struct SettingsView: View {
             }
             HStack(alignment: .top, spacing: 16) {
                 appColumn(Array(store.slots.prefix(4)))
-                appColumn(Array(store.slots.suffix(4)))
+                appColumn(Array(store.slots.dropFirst(4).prefix(4)))
+                appColumn(Array(store.slots.dropFirst(8).prefix(4)))
             }
 
             if let notice = store.notice {
@@ -136,7 +137,7 @@ private struct SettingsView: View {
         }
         .padding(24)
         }
-        .frame(width: 1000, height: 600)
+        .frame(width: 1200, height: 700)
     }
 
     private func appColumn(_ slots: [SlotConfiguration]) -> some View {
@@ -153,40 +154,43 @@ private struct SettingsView: View {
 
     private func appRow(_ slot: SlotConfiguration) -> some View {
         let url = store.applicationURL(for: slot)
-        return HStack(spacing: 12) {
-            Text(slot.shortcut)
-                .font(.system(.title3, design: .monospaced).weight(.semibold))
-                .frame(width: 44)
-                .accessibilityLabel(slot.shortcutKey.accessibilityLabel)
-            if let url {
-                Image(nsImage: NSWorkspace.shared.icon(forFile: url.path))
-                    .resizable().frame(width: 32, height: 32)
-            } else {
-                Image(systemName: "app.dashed").font(.system(size: 28))
-                    .foregroundStyle(.secondary).frame(width: 32, height: 32)
-            }
-            VStack(alignment: .leading, spacing: 3) {
-                Text(slot.displayName).font(.body.weight(.medium)).lineLimit(1)
-                if let message = store.registrationErrorMessage(for: slot.id) {
-                    Text(message)
-                        .font(.caption).foregroundStyle(.red)
-                } else if !slot.isAssigned {
-                    Text("앱 선택으로 연결하세요")
-                        .font(.caption).foregroundStyle(.secondary)
-                } else if url == nil {
-                    Text("앱을 찾을 수 없습니다")
-                        .font(.caption).foregroundStyle(.orange)
+        return VStack(spacing: 8) {
+            HStack(spacing: 10) {
+                Text(slot.shortcut)
+                    .font(.system(.title3, design: .monospaced).weight(.semibold))
+                    .frame(width: 44)
+                    .accessibilityLabel(slot.shortcutKey.accessibilityLabel)
+                if let url {
+                    Image(nsImage: NSWorkspace.shared.icon(forFile: url.path))
+                        .resizable().frame(width: 32, height: 32)
                 } else {
-                    Text("단축키 사용 가능").font(.caption).foregroundStyle(.secondary)
+                    Image(systemName: "app.dashed").font(.system(size: 28))
+                        .foregroundStyle(.secondary).frame(width: 32, height: 32)
                 }
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(slot.displayName).font(.body.weight(.medium)).lineLimit(1)
+                        .help(slot.displayName)
+                    if let message = store.registrationErrorMessage(for: slot.id) {
+                        Text(message).font(.caption).foregroundStyle(.red)
+                    } else if !slot.isAssigned {
+                        Text("앱 선택으로 연결하세요").font(.caption).foregroundStyle(.secondary)
+                    } else if url == nil {
+                        Text("앱을 찾을 수 없습니다").font(.caption).foregroundStyle(.orange)
+                    } else {
+                        Text("단축키 사용 가능").font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            Button("열기") { store.launch(slot.id) }
-                .disabled(url == nil || store.launching.contains(slot.id))
-                .accessibilityLabel("\(slot.displayName) 열기")
-            Button("앱 선택…") { chooseApp(slot.id) }
-                .accessibilityLabel("\(slot.shortcutKey.accessibilityLabel) 앱 선택")
+            HStack {
+                Spacer()
+                Button("열기") { store.launch(slot.id) }
+                    .disabled(url == nil || store.launching.contains(slot.id))
+                    .accessibilityLabel("\(slot.displayName) 열기")
+                Button("앱 선택…") { chooseApp(slot.id) }
+                    .accessibilityLabel("\(slot.shortcutKey.accessibilityLabel) 앱 선택")
+            }
         }
-        .padding(.horizontal, 14).padding(.vertical, 14)
+        .padding(12)
     }
 }

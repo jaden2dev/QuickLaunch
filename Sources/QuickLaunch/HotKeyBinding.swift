@@ -1,6 +1,6 @@
 import Carbon
 
-/// Event IDs are independent of key codes; ID 100 never overlaps app slots 1…8.
+/// Event IDs are independent of key codes; ID 100 never overlaps app slots 1…12.
 enum HotKeyAction: Equatable {
     case application(slotID: Int)
     case toggleSettings

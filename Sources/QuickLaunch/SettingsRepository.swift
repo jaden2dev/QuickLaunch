@@ -19,7 +19,8 @@ struct SlotConfiguration: Codable, Equatable, Identifiable {
         .init(id: 1, displayName: "Google Chrome", bundleIdentifier: "com.google.Chrome"),
         .init(id: 2, displayName: "Terminal", bundleIdentifier: "com.apple.Terminal"),
         .init(id: 3, displayName: "Slack", bundleIdentifier: "com.tinyspeck.slackmacgap"),
-        .unassigned(for: .q), .unassigned(for: .w), .unassigned(for: .e), .unassigned(for: .r)
+        .unassigned(for: .q), .unassigned(for: .w), .unassigned(for: .e), .unassigned(for: .r),
+        .unassigned(for: .a), .unassigned(for: .s), .unassigned(for: .d), .unassigned(for: .f)
     ]
 
     static func unassigned(for key: ShortcutKey) -> SlotConfiguration {
@@ -49,7 +50,7 @@ struct SlotConfiguration: Codable, Equatable, Identifiable {
     }
 }
 
-/// Migrates old four-slot assignments by their selected key, then fixes all eight IDs.
+/// Migrates saved assignments by their selected key, then normalizes all fixed IDs.
 struct SettingsRepository {
     static let key = "applicationSlots.v1"
     let defaults: UserDefaults

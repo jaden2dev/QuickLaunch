@@ -14,18 +14,18 @@ final class HotKeyBindingTests: XCTestCase {
         XCTAssertEqual(bindings[0].modifiers & UInt32(shiftKey), 0)
     }
 
-    func testSettingsEventDoesNotOverlapEightApplicationEvents() {
+    func testSettingsEventDoesNotOverlapTwelveApplicationEvents() {
         let slots = ShortcutKey.allCases.map {
             SlotConfiguration(id: $0.slotID, displayName: "App \($0.rawValue)", bundleIdentifier: "example.\($0.rawValue)")
         }
         let bindings = HotKeyBinding.plan(for: slots)
-        XCTAssertEqual(bindings.count, 9)
-        XCTAssertEqual(Set(bindings.map(\.eventID)).count, 9)
+        XCTAssertEqual(bindings.count, 13)
+        XCTAssertEqual(Set(bindings.map(\.eventID)).count, 13)
         for key in ShortcutKey.allCases {
             XCTAssertEqual(HotKeyAction.from(eventID: key.eventID), .application(slotID: key.slotID))
         }
         XCTAssertEqual(HotKeyAction.from(eventID: 100), .toggleSettings)
-        for invalidID: UInt32 in [0, 9, 99, UInt32.max] {
+        for invalidID: UInt32 in [0, 13, 99, UInt32.max] {
             XCTAssertNil(HotKeyAction.from(eventID: invalidID))
         }
     }
